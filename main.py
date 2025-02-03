@@ -1,8 +1,6 @@
 import tkinter as tk
-
 from anagram_solver import AnagramSolver
 from calculator import Calculator
-import anagram_solver as anag
 
 def main():
     root = tk.Tk()

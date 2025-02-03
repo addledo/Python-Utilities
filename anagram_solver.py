@@ -52,6 +52,7 @@ class AnagramSolver:
         self.results = tk.StringVar()
         self.results_label = tk.Label(self.window)
         self.draw_ui()
+        self.window.bind('<Return>', lambda event: self.solve())
         self.window.mainloop()
 
     def solve(self):
@@ -68,8 +69,7 @@ class AnagramSolver:
             if check_anagram(user_letters, word_to_check):
                 solved_words.append(word_to_check)
 
-        self.display_result(str(solved_words)
-)
+        self.display_result(str(solved_words))
 
     def display_result(self, result):
         self.results.set(result)
