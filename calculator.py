@@ -12,8 +12,6 @@ class Calculator:
     def __init__(self):
         self.buffer = ""
         self.display_text = tk.StringVar()
-
-    def start(self):
         window = self.draw_calc()
         window.mainloop()
 

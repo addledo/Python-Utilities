@@ -51,7 +51,7 @@ class AnagramSolver:
         self.input_box = tk.Entry(self.window)
         self.results = tk.StringVar()
         self.results_label = tk.Label(self.window)
-        self.draw_ui()
+        self.configure_ui()
         self.window.bind('<Return>', lambda event: self.solve())
         self.window.mainloop()
 
@@ -79,16 +79,15 @@ class AnagramSolver:
         word = re.sub(r'\W+', '', word)
         return word
 
-    def draw_ui(self):
+    def configure_ui(self):
         self.window.title("Anagram Solver")
         self.window.geometry('800x500')
         self.window.resizable(False, False)
 
         self.input_box.configure(width=40, font=('Arial', 20))
-        self.input_box.pack()
+        self.input_box.pack(pady=15)
 
-
-        solve_button = tk.Button(self.window, command=self.solve, width=10, height=5, text='Solve!', font=('Terminal', 15))
-        solve_button.pack()
+        solve_button = tk.Button(self.window, command=self.solve, width=10, height=4, text='Solve!', font=('Terminal', 15))
+        solve_button.pack(pady=15)
         self.results_label.configure(textvariable=self.results)
-        self.results_label.pack()
+        self.results_label.pack(pady=15)
