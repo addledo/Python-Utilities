@@ -1,6 +1,7 @@
 import tkinter as tk
 import re
 
+# TODO Format output and improve UI
 
 def load_words():
     with open('words_alpha.txt') as word_file:
@@ -48,8 +49,9 @@ class AnagramSolver:
         self.words = load_words()
         self.window = tk.Toplevel()
         self.input_box = tk.Entry(self.window)
+        self.results = tk.StringVar()
+        self.results_label = tk.Label(self.window)
         self.draw_ui()
-
         self.window.mainloop()
 
     def solve(self):
@@ -58,15 +60,19 @@ class AnagramSolver:
 
         solved_words = []
 
+        if len(user_word) == 0:
+            self.display_result('Enter a word')
+            return
+
         for word_to_check in self.words[len(user_word)]:
             if check_anagram(user_letters, word_to_check):
                 solved_words.append(word_to_check)
 
-        print(solved_words)
-        # return solved_words
+        self.display_result(str(solved_words)
+)
 
     def display_result(self, result):
-        pass
+        self.results.set(result)
 
     def get_user_word(self):
         word = self.input_box.get()
@@ -75,12 +81,14 @@ class AnagramSolver:
 
     def draw_ui(self):
         self.window.title("Anagram Solver")
-        self.window.geometry('400x600')
+        self.window.geometry('800x500')
         self.window.resizable(False, False)
 
         self.input_box.configure(width=40, font=('Arial', 20))
         self.input_box.pack()
 
-        solve_button = tk.Button(self.window, command=self.solve, width=10, height=7, text='Solve!',
-                                 font=('Terminal', 15))
+
+        solve_button = tk.Button(self.window, command=self.solve, width=10, height=5, text='Solve!', font=('Terminal', 15))
         solve_button.pack()
+        self.results_label.configure(textvariable=self.results)
+        self.results_label.pack()
