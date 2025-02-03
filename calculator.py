@@ -1,4 +1,5 @@
-from tkinter import *
+import tkinter as tk
+from tkinter import Label, Frame, Button
 
 class Calculator:
     button_font = ('arial', 15)
@@ -9,13 +10,12 @@ class Calculator:
     display_font = ('arial', 18)
 
     def __init__(self):
-        self.window = Tk()
         self.buffer = ""
-        self.display_text = StringVar()
+        self.display_text = tk.StringVar()
 
-        self.draw_calc()
-        self.window.mainloop()
-
+    def start(self):
+        window = self.draw_calc()
+        window.mainloop()
 
     def button_press(self, num):
         self.buffer += str(num)
@@ -45,15 +45,18 @@ class Calculator:
 
 
     def draw_calc(self):
-        self.window.title = "Calculator"
-        # self.window.geometry = "400x600"
+        window = tk.Toplevel()
+        window.title("Calculator")
+        window.geometry('400x600')
+        window.resizable(False, False)
 
-        calc_display = Label(self.window, width=self.display_width, height=self.display_height, bg="white",
+        calc_display = Label(window, width=self.display_width, height=self.display_height, bg="white",
             textvariable=self.display_text, font=self.display_font)
         calc_display.pack()
 
-        frame = Frame(self.window)
+        frame = Frame(window)
         frame.pack()
+
 
         ## NUMBERS
         button1 = Button(frame, text="1", height=self.button_height, width=self.button_width, font=self.button_font,
@@ -117,3 +120,5 @@ class Calculator:
         button_ce.grid(row=2, column=4)
         button_dp.grid(row=3, column=2)
         button_equals.grid(row=3, column=3, padx=(20,0))
+
+        return window

@@ -1,15 +1,25 @@
-from tkinter import *
+import tkinter as tk
 from calculator import Calculator
 
-#TODO Make calc work from root window.
+def main():
+    root = tk.Tk()
+    root.title("Home")
+    root.resizable(False, False)
+    root.geometry('1024x1024')
+    root.attributes('-topmost', 1)
 
-# root = Tk()
-# root.title = "Home"
-# # root.geometry = "400x600"
-#
-# button_calc = Button(root, command=Calculator, text="Calculator", width=40)
-# button_calc.pack()
+    bg_img = tk.PhotoImage(file='img/Retro-Cityscape.png')
+    bg_label = tk.Label(root, image=bg_img)
+    bg_label.pack()
 
-# root.mainloop()
+    title_label = tk.Label(text='UTILITIES', background='#1B90DB', font=('Terminal', 100), width=11, height=2)
+    title_label.place(x=40, y=50)
 
-Calculator()
+
+    button_calc = tk.Button(root, command=lambda: Calculator().start(), text="Calculator", font=('Terminal', 20), width=20, height=5)
+    button_calc.place(x=50, y=450)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
